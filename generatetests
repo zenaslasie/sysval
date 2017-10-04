@@ -1,0 +1,5 @@
+#!/bin/bash
+
+jmlunitng --package --reflection --dest tests src
+
+

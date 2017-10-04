@@ -1,0 +1,7 @@
+#!/bin/bash
+
+export JAVA_HOME=/usr/local/jdk_se7
+export PATH=$JAVA_HOME/bin:$PATH
+export JMLUNITNG_DIR=/usr/local/jmlunitng-1.4
+
+javac -cp $JMLUNITNG_DIR/lib/jmlunitng.jar:testbin -d testbin tests/*.java

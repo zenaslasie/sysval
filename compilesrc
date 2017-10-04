@@ -1,0 +1,6 @@
+#!/bin/bash
+
+mkdir -p testbin
+
+rac -d testbin src/*.java
+
