@@ -16,6 +16,7 @@ class LookupScale {
 	 * @param values the array with break point values
 	 */
 	// CONTRACT 
+	//@ ensures (\forall int i; i >=0 && i < values.length; this.values[i]==values[i]);
 	LookupScale(int[] values) {
 		this.values = values;
 	}
@@ -27,7 +28,12 @@ class LookupScale {
 	 * @param max maximal value of the scale
 	 * @param size number of break points in the scale
 	 */
-	// CONTRACT 
+	// CONTRACT
+	//@ requires min >=0 && max > min && size > 0;
+	//@ requires (\forall int i; i >=0 && i < size; this.values[i]==0);
+	//@ ensures this.values[0]==min;
+	//@ ensures (\forall int i; i >=1 && i < this.values.length; this.values[i]== this.values[i-1] + (max - min)/(size -1));
+	
 	LookupScale(int min, int max, int size) {
 		this.values = new int[size];
 		int chunk = (max - min) / (size - 1);
@@ -46,7 +52,7 @@ class LookupScale {
 	// CONTRACT
 	/*@ pure @*/
 	ScaleIndex lookupValue(SensorValue sv) {
-		int v = sv.getValue();
+		int v = sv.getValue();//@ invariant (\forall int i; i >=0 && i < values.length - 2; values[i+1] - values[i] > 0 && values[i+2] - values[i+1] == values[i+1] - values[i]);
 		// First get the integral part
 		// The most convenient way to lookup scales is from the end
 		int intPart = this.values.length - 1;

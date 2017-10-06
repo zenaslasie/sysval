@@ -12,13 +12,42 @@ class SensorValue {
 	final int maxValue;
 
 	// INVARIANT(S)
-	
-	/**
-	 * @param failSafe the default fail-safe value for this sensor
-	 * @param minValue minimum allowable value for this sensor
-	 * @param maxValue maximum allowable value for this sensor
-	 */
-	// CONTRACT
+		/*
+		 * @ invariant failSafe;
+		 * 
+		 * @ invariant minValue;
+		 * 
+		 * @ invariant maxValue;
+		 * 
+		 * @ assignable value;
+		 *
+		 */
+
+		/**
+		 * @param failSafe
+		 *            the default fail-safe value for this sensor
+		 * @param minValue
+		 *            minimum allowable value for this sensor
+		 * @param maxValue
+		 *            maximum allowable value for this sensor
+		 */
+		// CONTRACT
+		/*
+		 * what if the sensors are reading temperature that could be negative?
+		 * 
+		 * @ requires minValue <= failSafe && failSafe <= maxValue;
+		 * 
+		 * @ assignable value;
+		 * 
+		 * @ ensures this.failSafe == \old(fialSafe);
+		 * 
+		 * @ ensures this.minValue == \old(minValue);
+		 * 
+		 * @ ensures this.maxValue == \old(maxValue);
+		 * 
+		 * @ ensure this.value == failSafe;
+		 * 
+		 */
 	SensorValue(int failSafe, int minValue, int maxValue) {
 		this.failSafe = failSafe;
 		this.minValue = minValue;
@@ -32,6 +61,17 @@ class SensorValue {
 	 * @param newValue newly read value
 	 */
 	// CONTRACT
+	/*
+	 * @ assignable newValue;
+	 * 
+	 * @ ensure (newValue < minValue || newValue > maxValue) ==> value==failSafe;
+	 * 
+	 * @
+	 * 
+	 * @ ensures !(newValue < minValue || newValue > maxValue) ==> value==newValue);
+	 * 
+	 * 
+	 */
 	void readSensor(int newValue) {
 		if(newValue < this.minValue || newValue > this.maxValue) {
 			this.value = this.failSafe;
@@ -44,7 +84,14 @@ class SensorValue {
 	 * @return the most recently read value
 	 */
 	// CONTRACT
-	int getValue() {
+	/*
+	 * @
+	 * 
+	 * @ensures \result==value;
+	 * 
+	 * @
+	 */
+	int /* @pure */ getValue() {
 		return this.value;
 	}
 	
