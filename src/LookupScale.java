@@ -40,7 +40,7 @@ class LookupScale {
 		this.values[0] = min;
 		for(int i=1; i<this.values.length; i++) {
 		  this.values[i] = this.values[i-1] + chunk;
-		}
+		};
 	}
 
 	/**
