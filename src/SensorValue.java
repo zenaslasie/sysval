@@ -35,7 +35,7 @@ class SensorValue {
 		/*
 		 * what if the sensors are reading temperature that could be negative?
 		 * 
-		 * @ requires minValue <= failSafe && failSafe <= maxValue;
+		 * @ requires value >= 0 && minValue >= 0 && minValue <= failSafe && failSafe <= maxValue;
 		 * 
 		 * @ assignable value;
 		 * 

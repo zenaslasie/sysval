@@ -19,6 +19,7 @@ class LookupTableLinear {
 	 * @param range the value range
 	 */
 	// CONTRACT
+	//@
 	LookupTableLinear(int startValue, int range) {
 		this.startValue = startValue;
 		this.range = range;
