@@ -36,6 +36,8 @@ class LookupScale {
 	
 	LookupScale(int min, int max, int size) {
 		this.values = new int[size];
+		//that values[0] may be a null dereference and checking division by zero 
+		//@ assume values != null && values.length == size && size != 1;
 		int chunk = (max - min) / (size - 1);
 		this.values[0] = min;
 		for(int i=1; i<this.values.length; i++) {
